@@ -6,7 +6,7 @@ const ProductTag = require('./ProductTag');
 
 
 // Categories have many Products
-Category.hasMAny(Product, {
+Category.hasMany(Product, {
   foreignKey: 'category_id',
   as: 'categoryproduct'
 });
