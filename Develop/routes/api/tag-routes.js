@@ -22,27 +22,47 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
   // create a new tag
   Tag.create({
-    id: res.body.id,
-    tag_name: res.body.tag_name
+    id: req.body.id,
+    tag_name: req.body.tag_name
   }).then((newTag) => {
     res.json(newTag);
   });
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', async (req, res) => {
   // update a tag's name by its `id` value
-  Tag.findByPk(req.params.id).then((tagData) => {
+  try {
+    const tagData = await Tag.update(req.body,
+      {
+        where: {
+          id: req.params.id,
+        }
+      }
+    );
     res.json(tagData);
-  });
+  } catch (err) {
+    res.json(err);
+  }
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async (req, res) => {
   // delete on tag by its `id` value
-  Tag.destory({
-    where: {
-      id: req.body.id,
-    },
-  })
+  try {
+    const deletedtag = await Tag.destroy({
+      where: {
+        id: req.params.id,
+      }
+    });
+
+    if (!deletedtag) {
+      res.status(404).json({ message: 'No location found with this id!' });
+      return;
+    }
+
+    res.status(200).json(deletedtag);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 module.exports = router;

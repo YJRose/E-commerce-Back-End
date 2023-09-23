@@ -24,3 +24,6 @@ THEN I am able to successfully create, update, and delete data in my database
 ``````
 ## Mack Up
 Vedio walkthrough
+1. including from GET routes to return all and single categories, all products, and all tags to POST, PUT and DELETE categories[https://drive.google.com/file/d/17oNecRYDo0_5EkKB9Cmc4sGPlAiqHFLv/view]
+
+2. POST, PUT and DELETE product and tag[https://drive.google.com/file/d/1K9TRP6rvnbwMubm2U4QZzXgVlpPEE0Yz/view]
